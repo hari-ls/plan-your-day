@@ -1,5 +1,35 @@
 // initialise an empty object for data management
 var data = {};
+var businessHours = {
+  start: 9,
+  end: 17,
+};
+
+// create the timeblock
+var createTimeBlock = function (n) {
+  var list = $("tbody");
+  var blockRow = $("<tr>");
+  var blockHour = $("<th>").addClass("hour");
+  var blockContent = $("<td>");
+  var contentText = $("<textarea>").addClass("form-control");
+  var blockBtn = $("<td>").addClass("saveBtn");
+  var btnIcon = $("<i>").addClass("fas fa-save");
+  // set attributes
+  $(blockHour).attr("scope", "row");
+  $(blockHour).text(moment.utc(n * 3600 * 1000).format("hA"));
+  $(contentText).attr("rows", "4");
+  $(contentText).attr("data-hour", n);
+  $(blockBtn).attr("data-hour", n);
+  // append elements
+  blockContent.append(contentText);
+  blockBtn.append(btnIcon);
+  blockRow.append(blockHour, blockContent, blockBtn);
+  list.append(blockRow);
+};
+// generate time block for each hour within the business hours
+for (var time = businessHours.start; time <= businessHours.end; time++) {
+  createTimeBlock(time);
+}
 
 // select the target elements
 var currentDay = $("#currentDay");
