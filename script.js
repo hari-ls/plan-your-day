@@ -1,6 +1,7 @@
 // initialise an empty object for data management
 var data = {};
 var businessHours = {
+  // using 24 hour format to initialise business hours
   start: 9,
   end: 17,
 };
@@ -16,6 +17,7 @@ var createTimeBlock = function (n) {
   var btnIcon = $("<i>").addClass("fas fa-save");
   // set attributes
   $(blockHour).attr("scope", "row");
+  // using utc funcion to remove hour shift due to timezone
   $(blockHour).text(moment.utc(n * 3600 * 1000).format("hA"));
   $(contentText).attr("rows", "4");
   $(contentText).attr("data-hour", n);
