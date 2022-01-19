@@ -31,10 +31,6 @@ var updateTimeblockColor = function (el) {
     $(el).addClass("future");
   }
 };
-// update color for each timeblock textarea
-for (var i = 0; i < textarea.length; i++) {
-  updateTimeblockColor(textarea[i]);
-}
 
 // listen to click event on save button and update the data in the local storage
 $(saveBtn).click(function () {
@@ -46,13 +42,16 @@ $(saveBtn).click(function () {
   setData();
 });
 
-// check is data is available and update the textarea values likewise
+// check is data is available and update the data likewise
 if (localData) {
   getData();
 } else {
   setData();
 }
+
+// update the color and value of the timeblock textareas
 for (var i = 0; i < textarea.length; i++) {
+  updateTimeblockColor(textarea[i]);
   var block = $(textarea[i]);
   var blockHour = $(textarea[i]).data("hour");
   var checkData = data[blockHour];
